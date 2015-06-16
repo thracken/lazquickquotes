@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>LAZ Quick Quote Tools - by Jeff Greenland</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+</head>
+
+<body>
+<div id="wrapper">
+<!--[if IE]><style>#wrapper{width: 50%;margin: 0 auto;}</style><![endif]-->
+
+
+<div id="header">
+<h1>LAZ Quick Quote Tools</h1>
+</div>
+
+<h3>Check All Sites:</h3>
+<p><a href="javascript:(function()%7B%24j('%23lightwindow_iframe').contents().find('%23vocab').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23rk').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23waz').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23raz').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23saz').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23raz-ell').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23tr').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23headsprout').prop('checked'%2Ctrue)%7D)();" id="check-all">Check All Sites</a> - Drag this link to your bookmarks bar, or right click and choose "Add to favorites" or "Bookmark this link".</p>
+<br />
+
+<h3>Multi-Year:</h3>
+<p><span class="modifylink" id="multiyearlink">Multi-Year</span> (Click to toggle options)</p>
+<br />
+
+
+<div id="my_options" style="display: none;">
+<p>To use the default options, just click the button below.</p>
+<p>To create your own, modify the options below, then click the button!</p>
+<br />
+
+
+<form class="clear" id="bk-form" action="javascript://">
+<input id="myhidden" style="display: none;" type="checkbox">
+
+<div class="options-area">
+<p>Discount %'s:</p>
+<p>Year 1: <input id="discount1" type="text" value="0" size="1"></p>
+<p>Year 2: <input id="discount2" type="text" value="5" size="1"></p>
+<p>Year 3: <input id="discount3" type="text" value="10" size="1"></p>
+</div>
+<div class="options-area">
+<p>Note to Customer:</p>
+<textarea id="customernote">Lock in your rate and beat next year's price increase with a multi-year option. Plus, receive additional discounts!</textarea>
+</div>
+<div class="options-area">
+<p>Internal Comments:</p>
+<textarea id="internalnote">Multi-year discount</textarea>
+</div>
+<p>Include Check All Sites: <input class="clear" id="includecheckall" type="checkbox"></p>
+<br class="clear" /><br />
+</div><!-- my_options -->
+
+<div id="raw-code-form">
+
+<p>You can enter your own code here, and the final code will also be displayed here:</p>
+<textarea id="bk-code" placeholder="alert('Hello there!');">alert("Hello there!");</textarea>
+<br />
+</div>
+<button type="submit">Create Link</button>
+</form>
+<br /><br />
+<div id="bk-results"></div>
+</div><!-- wrapper -->
+
+<script src="pagescript.js"></script>
+</body>
+</html>
