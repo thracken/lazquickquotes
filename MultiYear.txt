@@ -1,0 +1,7 @@
+$j('#lightwindow_iframe').contents().find('div[id*="additionalDiscountBlind"]').toggle();
+$j('#lightwindow_iframe').contents().find('input[id*="onlyUseBase"]').prop('checked',false);
+$j('#lightwindow_iframe').contents().find('input[id*="basePercent"]').prop('value','0');
+$j('#lightwindow_iframe').contents().find('input[id*="plusOneYearPercent"]').prop('value','5');
+$j('#lightwindow_iframe').contents().find('input[id*="plusTwoYearPercent"]').prop('value','10');
+$j('#lightwindow_iframe').contents().find('#customer_note').text("Lock in your rate and beat next year's price increase with a multi-year option. Plus, receive additional discounts!");
+$j('#lightwindow_iframe').contents().find('#comment').text("Multi-year discount");

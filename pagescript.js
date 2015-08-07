@@ -25,7 +25,7 @@ var year2discount = 5;
 var year3discount = 10;
 
 //Variables that Reps can NOT change
-var myear_part1 = "$j('#lightwindow_iframe').contents().find('div[id*=\"additionalDiscountBlind\"]').toggle();$j('#lightwindow_iframe').contents().find('input[id*=\"onlyUseBase\"]').prop('checked',false);$j('#lightwindow_iframe').contents().find('input[id*=\"originalPercent\"]').prop('value','"
+var myear_part1 = "$j('#lightwindow_iframe').contents().find('div[id*=\"additionalDiscountBlind\"]').toggle();$j('#lightwindow_iframe').contents().find('input[id*=\"onlyUseBase\"]').prop('checked',false);$j('#lightwindow_iframe').contents().find('input[id*=\"basePercent\"]').prop('value','"
 var myear_part2 = "');$j('#lightwindow_iframe').contents().find('input[id*=\"plusOneYearPercent\"]').prop('value','"
 var myear_part3 = "');$j('#lightwindow_iframe').contents().find('input[id*=\"plusTwoYearPercent\"]').prop('value','"
 var myear_part4 = "');$j('#lightwindow_iframe').contents().find('#comment').text(\""

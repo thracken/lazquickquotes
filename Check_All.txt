@@ -1,0 +1,8 @@
+$j('#lightwindow_iframe').contents().find('#vocab').prop('checked',true);
+$j('#lightwindow_iframe').contents().find('#rk').prop('checked',true);
+$j('#lightwindow_iframe').contents().find('#waz').prop('checked',true);
+$j('#lightwindow_iframe').contents().find('#raz').prop('checked',true);
+$j('#lightwindow_iframe').contents().find('#saz').prop('checked',true);
+$j('#lightwindow_iframe').contents().find('#raz-ell').prop('checked',true);
+$j('#lightwindow_iframe').contents().find('#tr').prop('checked',true);
+$j('#lightwindow_iframe').contents().find('#headsprout').prop('checked',true);
