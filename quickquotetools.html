@@ -11,19 +11,31 @@
 <div id="wrapper">
 <!--[if IE]><style>#wrapper{width: 50%;margin: 0 auto;}</style><![endif]-->
 
-
 <div id="header">
 <h1>LAZ Quick Quote Tools</h1>
 </div>
-
-<h3>Check All Sites:</h3>
-<p><a href="javascript:(function()%7B%24j('%23lightwindow_iframe').contents().find('%23vocab').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23rk').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23waz').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23raz').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23saz').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23raz-ell').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23tr').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23headsprout').prop('checked'%2Ctrue)%7D)();" id="check-all">Check All Sites</a> - Drag this link to your bookmarks bar, or right click and choose "Add to favorites" or "Bookmark this link".</p>
+<p>Use this page to create bookmarks that will speed up creating your CSI quotes.</p>
+<p>Click a link below to show/hide the options for that type of bookmark.</p>
 <br />
 
-<h3>Multi-Year:</h3>
-<p><span class="modifylink" id="multiyearlink">Multi-Year</span> (Click to toggle options)</p>
-<br />
+<h3 id="showallheader">Show All Products</h3>
+<div id="showalloptions" style="display: none">
+<p>Click and drag the link below to your bookmarks bar, or right click and choose "Add to favorites" or "Bookmark this link".</p>
+<p><strong>Bookmark This Link:</strong> <a href="javascript:(function()%7B%24j('%23lightwindow_iframe').contents().find('%23vocab').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23rk').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23waz').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23raz').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23saz').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23raz-ell').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23tr').prop('checked'%2Ctrue)%3B%24j('%23lightwindow_iframe').contents().find('%23headsprout').prop('checked'%2Ctrue)%7D)();" id="check-all">Show All Products</a></p>
+</div>
 
+<br />
+<h3 id="expdateheader">Set Quote "Valid Through" Date</h3>
+<div id="expdateoptions" style="display: none">
+<p>Pick a date: <input type="date" value="2015-12-31" id="datepicker"></p>
+<p>Set the date, then click and drag this link to your bookmarks bar, or right click and choose "Add to favorites" or "Bookmark this link".</p>
+<p><strong>Bookmark This Link:</strong> <a href='javascript:(function(){$j("#lightwindow_iframe").contents().find("#valid_through").prop("value","12-31-2015")})()' id="expirationdatelink">Expiration Date</a> </p>
+</div>
+
+<br />
+<h3 id="multiyearheader">Multi-Year</h3>
+<div id="multiyearoptions" style="display: none">
+<p>Click <span class="modifylink" id="multiyearlink">here</span> to see the raw code of the bookmarklet.</p>
 
 <div id="my_options" style="display: none;">
 <p>To use the default options, just click the button below.</p>
@@ -48,7 +60,9 @@
 <p>Internal Comments:</p>
 <textarea id="internalnote">Multi-year discount</textarea>
 </div>
-<p>Show all sites on the quote: <input class="clear" id="includecheckall" type="checkbox"></p>
+<p><label for="includecheckall">Show all products on the quote:</label> <input class="clear" id="includecheckall" type="checkbox"></p>
+<p><label for="myexpdate">Set the quote expiration date:</label> <input class="clear" id="myexpdate" type="checkbox"> <input type="date" value="2015-12-31" id="mydatepicker" style="display: none;"></p>
+<p><label for="itemizedcolumn">Hide the "itemized discount" column:</label> <input class="clear" id="itemizedcolumn" type="checkbox"> </p>
 <br class="clear" /><br />
 </div><!-- my_options -->
 
@@ -62,6 +76,8 @@
 </form>
 <br /><br />
 <div id="bk-results"></div>
+</div>
+
 </div><!-- wrapper -->
 
 <script src="pagescript.js"></script>

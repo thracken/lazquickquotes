@@ -1,8 +1,38 @@
 //Clear the code box on page load
 $('#bk-code').val('alert(\'Hello there!\');');
 
-//Show Multi Year Options
-var myischecked = $('#myhidden').prop('checked');
+//Toggle Option Visibility on Click
+$("#showallheader").click(function(){
+	$("#showalloptions").slideToggle("fast");
+});
+$("#expdateheader").click(function(){
+	$("#expdateoptions").slideToggle("fast");
+});
+$("#multiyearheader").click(function(){
+	$("#multiyearoptions").slideToggle("fast");
+});
+
+//Quote Expiration Date Functions
+function FormatDate(date){
+	var year = date.slice(0,4);
+	var month = date.slice(5,7);
+	var day = date.slice(8,10);
+	return month + "-" + day + "-" + year
+}
+
+$("#datepicker").change(function(){
+	date = $("#datepicker").val();
+	nicedate = FormatDate(date);
+	expdate_code = '$j("#lightwindow_iframe").contents().find("#valid_through").prop("value","' + nicedate + '")'
+	expdate_link = 'javascript:(function(){' + expdate_code + '})()';
+	$("#expirationdatelink").attr("href", expdate_link);
+});
+
+
+//Multi Year Functions
+
+//Switch from Multi Year Options to Raw Code Box
+var myischecked = $('#myhidden').prop("checked");
 $('#multiyearlink').click(function(){
 	if (myischecked == false){
 		$('#myhidden').prop('checked',true);
@@ -13,6 +43,16 @@ $('#multiyearlink').click(function(){
 	myischecked = $('#myhidden').prop('checked');
 	$('#my_options').toggle();
 	$('#raw-code-form').toggle();
+});
+//Changing the HTML for the dib that is initially hidden/shown breaks the form, hence the next line.
+$('#multiyearlink').click();
+
+//Multi Year Expiration Date Picker
+$("#myexpdate").click(function(){
+	var myexpdate = $("#myexpdate").prop("checked");
+	if (myexpdate == true){
+		$("#mydatepicker").toggle();
+	}
 });
 
 //Variables that Reps can change
@@ -32,10 +72,14 @@ var myear_part6 = "\");";
 
 var check_all_sites = "$j('#lightwindow_iframe').contents().find('#vocab').prop('checked',true);$j('#lightwindow_iframe').contents().find('#rk').prop('checked',true);$j('#lightwindow_iframe').contents().find('#waz').prop('checked',true);$j('#lightwindow_iframe').contents().find('#raz').prop('checked',true);$j('#lightwindow_iframe').contents().find('#saz').prop('checked',true);$j('#lightwindow_iframe').contents().find('#raz-ell').prop('checked',true);$j('#lightwindow_iframe').contents().find('#tr').prop('checked',true);$j('#lightwindow_iframe').contents().find('#headsprout').prop('checked',true);";
 
+var myvalidthru_1 = "$j('#lightwindow_iframe').contents().find('#valid_through').prop('value','";
+var myvalidthru_2 = "');";
+
+var itemized_code = "$j('#lightwindow_iframe').contents().find('#displayItemizedDiscounts').prop('checked',false);";
+
 //Other Global variables that should probably be put somewhere better
 var $result,
 		$wrap = $('#bk-results');
-
 
 //Bookmarklet Creator
 function minify(code) {
@@ -88,75 +132,100 @@ function animate_result(){
 	});
 }
 
-// The reason for it all - Custom Bookmarklet Generation
+// The Main Function - Custom Bookmarklet Generated when "Create Link" button is clicked
 $('#bk-form').submit(function(evt) {
 	evt.preventDefault();
 	var $code = $('#bk-code'),
 			code = $code.val();
 
-//Using custom code
-if (myischecked == false){
-	if (!$.trim(code)) {
-		alert('Please enter some code first, so I can create a glorious bookmarklet for you!');
-		return;
-	}
-	code = $('#bk-code').val();
-	code = asBookmarklet(code);
-	$result = $('<div>', {'class': 'result'}).append(
-		$('<p>', {'html': '<em>Congrats!</em> You can save this to your bookmarks/favorites by:<br /><br /><b>Internet Explorer:</b> Right-click the link, and select "Add to favorites"<br /><b>Firefox:</b>Right-click the link, and select "Bookmark this Link"<br /><b>Chrome:</b> Click and drag the link to your bookmarks bar.<br />Be sure to give it a descriptive name!<br /><br /> Here\'s the link: '}).append(
-		$('<a/>', {
-			'class': 'bookmarklet',
-			href: code,
-			text: 'Multi-Year Quote'
-		}))
-	);
-	animate_result();
-}
-
-//Multi-Year Quote Generator
-if (myischecked == true){
-
-	var $internal_comment = $('#internalnote'),
-	    internal_comment = $internal_comment.val(),
-
-	    $customer_note = $('#customernote'),
-	    customer_note = $customer_note.val(),
-
-	    $year1discount = $('#discount1'),
-	    year1discount = $year1discount.val(),
-	    $year2discount = $('#discount2'),
-	    year2discount = $year2discount.val(),
-	    $year3discount = $('#discount3'),
-	    year3discount = $year3discount.val(),
-
-	    full_multiyear = myear_part1 + year1discount + myear_part2 + year2discount + myear_part3 + year3discount + myear_part4 + internal_comment + myear_part5 + customer_note + myear_part6;
-
-	//Including Check All Sites option
-	var check_all_option = $('#includecheckall').prop('checked');
-	if (check_all_option == true){
-		var my_and_checkall = full_multiyear + check_all_sites;
-		$('#bk-code').val(my_and_checkall);
-	}
-	if (check_all_option == false){
-		$('#bk-code').val(full_multiyear);
+	//Using custom code
+	if (myischecked == false){
+		if (!$.trim(code)) {
+			alert('Please enter some code first, so I can create a glorious bookmarklet for you! *If you see this message repeatedly, you may need to reload the page.*');
+			return;
+		}
+		code = $('#bk-code').val();
+		code = asBookmarklet(code);
+		$result = $('<div>', {'class': 'result'}).append(
+			$('<p>', {'html': '<em>Congrats!</em> You can save this to your bookmarks/favorites by:<br /><br /><b>Internet Explorer:</b> Right-click the link, and select "Add to favorites"<br /><b>Firefox:</b>Right-click the link, and select "Bookmark this Link"<br /><b>Chrome:</b> Click and drag the link to your bookmarks bar.<br />Be sure to give it a descriptive name!<br /><br /><strong>Bookmark this link:</strong> '}).append(
+			$('<a/>', {
+				'class': 'bookmarklet',
+				href: code,
+				text: 'Multi-Year Quote'
+			}))
+		);
+		animate_result();
 	}
 
-	if (!$.trim(code)) {
-		alert('Please enter some code first, so I can create a glorious bookmarklet for you!');
-		return;
-	}
-	code = $('#bk-code').val();
-	code = asBookmarklet(code);
-	$result = $('<div>', {'class': 'result'}).append(
-		$('<p>', {'html': '<em>Congrats!</em> You can save this to your bookmarks/favorites by:<br /><br /><b>Internet Explorer:</b> Right-click the link, and select "Add to favorites"<br /><b>Firefox:</b>Right-click the link, and select "Bookmark this Link"<br /><b>Chrome:</b> Click and drag the link to your bookmarks bar.<br />Be sure to give it a descriptive name!<br /><br /> Here\'s the link: '}).append(
-		$('<a/>', {
-			'class': 'bookmarklet',
-			href: code,
-			text: 'Multi-Year Quote'
-		}))
-	);
+	//Multi-Year Quote Generator
+	if (myischecked == true){
+		var $internal_comment = $('#internalnote'),
+		    internal_comment = $internal_comment.val(),
 
-	animate_result();
-	$('#bk-code').val("");
-}
+		    $customer_note = $('#customernote'),
+		    customer_note = $customer_note.val(),
+
+		    $year1discount = $('#discount1'),
+		    year1discount = $year1discount.val(),
+		    $year2discount = $('#discount2'),
+		    year2discount = $year2discount.val(),
+		    $year3discount = $('#discount3'),
+		    year3discount = $year3discount.val(),
+
+				$validthrudate = $('#mydatepicker').val();
+				validthrudate = FormatDate($validthrudate);
+				myvalidthru = myvalidthru_1 + validthrudate + myvalidthru_2;
+
+		    full_multiyear = myear_part1 + year1discount + myear_part2 + year2discount + myear_part3 + year3discount + myear_part4 + internal_comment + myear_part5 + customer_note + myear_part6;
+
+		//Including Check All Sites option
+		var check_all_option = $('#includecheckall').prop('checked');
+		var valid_thru_option = $('#myexpdate').prop('checked');
+		var itemized_column = $('#itemizedcolumn').prop('checked');
+
+		checked_options:{
+			if (check_all_option == true && valid_thru_option == true && itemized_column == true){
+				$('#bk-code').val(full_multiyear + check_all_sites + myvalidthru + itemized_code);
+				break checked_options;
+			} else if (check_all_option == true && valid_thru_option == true){
+				$('#bk-code').val(full_multiyear + check_all_sites + myvalidthru);
+				break checked_options;
+			} else if (check_all_option == true && itemized_column == true){
+				$('#bk-code').val(full_multiyear + check_all_sites + itemized_code);
+				break checked_options;
+			} else if (valid_thru_option == true && itemized_column == true){
+				$('#bk-code').val(full_multiyear + myvalidthru + itemized_code);
+				break checked_options;
+			} else if (check_all_option == true){
+				$('#bk-code').val(full_multiyear + check_all_sites);
+				break checked_options;
+			} else if (valid_thru_option == true){
+				$('#bk-code').val(full_multiyear + myvalidthru);
+				break checked_options;
+			} else if (itemized_column == true){
+				$('#bk-code').val(full_multiyear + itemized_code);
+				break checked_options;
+			} else {
+				$('#bk-code').val(full_multiyear);
+			}
+		}
+
+		if (!$.trim(code)) {
+			alert('Please enter some code first, so I can create a glorious bookmarklet for you!  *If you see this message repeatedly, you may need to reload the page.*');
+			return;
+		}
+		code = $('#bk-code').val();
+		code = asBookmarklet(code);
+		$result = $('<div>', {'class': 'result'}).append(
+			$('<p>', {'html': '<em>Congrats!</em> You can save this to your bookmarks/favorites by:<br /><br /><b>Internet Explorer:</b> Right-click the link, and select "Add to favorites"<br /><b>Firefox:</b>Right-click the link, and select "Bookmark this Link"<br /><b>Chrome:</b> Click and drag the link to your bookmarks bar.<br />Be sure to give it a descriptive name!<br /><br /><strong>Bookmark this link:</strong> '}).append(
+			$('<a/>', {
+				'class': 'bookmarklet',
+				href: code,
+				text: 'Multi-Year Quote'
+			}))
+		);
+
+		animate_result();
+		//$('#bk-code').val("");
+	}
 });
