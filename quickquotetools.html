@@ -28,8 +28,9 @@
 <h3 id="expdateheader">Set Quote "Valid Through" Date</h3>
 <div id="expdateoptions" style="display: none">
 <p>Pick a date: <input type="date" value="2015-12-31" id="datepicker"></p>
+<p>For Firefox or IE, use: YYYY-MM-DD</p>
 <p>Set the date, then click and drag this link to your bookmarks bar, or right click and choose "Add to favorites" or "Bookmark this link".</p>
-<p><strong>Bookmark This Link:</strong> <a href='javascript:(function(){$j("#lightwindow_iframe").contents().find("#valid_through").prop("value","12-31-2015")})()' id="expirationdatelink">Expiration Date</a> </p>
+<p><strong>Bookmark This Link:</strong> <a href='javascript:(function(){$j("#lightwindow_iframe").contents().find("#valid_through").prop("value","12-31-2015")})()' id="expirationdatelink">Expiration Date</a></p>
 </div>
 
 <br />
@@ -61,7 +62,7 @@
 <textarea id="internalnote">Multi-year discount</textarea>
 </div>
 <p><label for="includecheckall">Show all products on the quote:</label> <input class="clear" id="includecheckall" type="checkbox"></p>
-<p><label for="myexpdate">Set the quote expiration date:</label> <input class="clear" id="myexpdate" type="checkbox"> <input type="date" value="2015-12-31" id="mydatepicker" style="display: none;"></p>
+<p><label for="myexpdate">Set the quote expiration date:</label> <input class="clear" id="myexpdate" type="checkbox"> <div id="mydatebox" style="display: none;"><input id="mydatepicker" type="date" value="2015-12-31"><p>For Firefox or IE, use: YYYY-MM-DD</p></div></p>
 <p><label for="itemizedcolumn">Hide the "itemized discount" column:</label> <input class="clear" id="itemizedcolumn" type="checkbox"> </p>
 <br class="clear" /><br />
 </div><!-- my_options -->

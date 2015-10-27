@@ -30,7 +30,6 @@ $("#datepicker").change(function(){
 
 
 //Multi Year Functions
-
 //Switch from Multi Year Options to Raw Code Box
 var myischecked = $('#myhidden').prop("checked");
 $('#multiyearlink').click(function(){
@@ -44,15 +43,21 @@ $('#multiyearlink').click(function(){
 	$('#my_options').toggle();
 	$('#raw-code-form').toggle();
 });
+
 //Changing the HTML for the dib that is initially hidden/shown breaks the form, hence the next line.
 $('#multiyearlink').click();
+
+//And, for Firefox, making sure all options are unchecked to start.
+$('#myhidden').prop('checked',false);
+myischecked = true;
+$('#includecheckall').prop('checked',false);
+$('#myexpdate').prop('checked',false);
+$('#itemizedcolumn').prop('checked',false);
 
 //Multi Year Expiration Date Picker
 $("#myexpdate").click(function(){
 	var myexpdate = $("#myexpdate").prop("checked");
-	if (myexpdate == true){
-		$("#mydatepicker").toggle();
-	}
+		$("#mydatebox").toggle();
 });
 
 //Variables that Reps can change
