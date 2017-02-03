@@ -75,12 +75,15 @@ var myear_part4 = "');$j('#lightwindow_iframe').contents().find('#comment').text
 var myear_part5 = "\");$j('#lightwindow_iframe').contents().find('#customer_note').text(\"";
 var myear_part6 = "\");";
 
-var check_all_sites = "$j('#lightwindow_iframe').contents().find('#vocab').prop('checked',true);$j('#lightwindow_iframe').contents().find('#rk').prop('checked',true);$j('#lightwindow_iframe').contents().find('#waz').prop('checked',true);$j('#lightwindow_iframe').contents().find('#raz').prop('checked',true);$j('#lightwindow_iframe').contents().find('#saz').prop('checked',true);$j('#lightwindow_iframe').contents().find('#raz-ell').prop('checked',true);$j('#lightwindow_iframe').contents().find('#tr').prop('checked',true);$j('#lightwindow_iframe').contents().find('#headsprout').prop('checked',true);";
+var check_all_sites = "$j('#lightwindow_iframe').contents().find('#vocab').prop('checked',true);$j('#lightwindow_iframe').contents().find('#rk').prop('checked',true);$j('#lightwindow_iframe').contents().find('#waz').prop('checked',true);$j('#lightwindow_iframe').contents().find('#raz').prop('checked',true);$j('#lightwindow_iframe').contents().find('#saz').prop('checked',true);$j('#lightwindow_iframe').contents().find('#raz-ell').prop('checked',true);$j('#lightwindow_iframe').contents().find('#tr').prop('checked',true);$j('#lightwindow_iframe').contents().find('#headsprout').prop('checked',true);$j('#lightwindow_iframe').contents().find('#razplus').prop('checked',true);";
 
 var myvalidthru_1 = "$j('#lightwindow_iframe').contents().find('#valid_through').prop('value','";
 var myvalidthru_2 = "');";
 
 var itemized_code = "$j('#lightwindow_iframe').contents().find('#displayItemizedDiscounts').prop('checked',false);";
+
+var total_discount_amount_code = "$j('#lightwindow_iframe').contents().find('#displayAmountOff').prop('checked', false);"
+var total_discount_percent_code = "$j('#lightwindow_iframe').contents().find('#displayPercentOff').prop('checked',false);" //currently un-used
 
 //Other Global variables that should probably be put somewhere better
 var $result,
@@ -187,33 +190,27 @@ $('#bk-form').submit(function(evt) {
 		var check_all_option = $('#includecheckall').prop('checked');
 		var valid_thru_option = $('#myexpdate').prop('checked');
 		var itemized_column = $('#itemizedcolumn').prop('checked');
+		var discount_total_option = $('#discounttotal').prop('checked');
 
-		checked_options:{
-			if (check_all_option == true && valid_thru_option == true && itemized_column == true){
-				$('#bk-code').val(full_multiyear + check_all_sites + myvalidthru + itemized_code);
-				break checked_options;
-			} else if (check_all_option == true && valid_thru_option == true){
-				$('#bk-code').val(full_multiyear + check_all_sites + myvalidthru);
-				break checked_options;
-			} else if (check_all_option == true && itemized_column == true){
-				$('#bk-code').val(full_multiyear + check_all_sites + itemized_code);
-				break checked_options;
-			} else if (valid_thru_option == true && itemized_column == true){
-				$('#bk-code').val(full_multiyear + myvalidthru + itemized_code);
-				break checked_options;
-			} else if (check_all_option == true){
-				$('#bk-code').val(full_multiyear + check_all_sites);
-				break checked_options;
-			} else if (valid_thru_option == true){
-				$('#bk-code').val(full_multiyear + myvalidthru);
-				break checked_options;
-			} else if (itemized_column == true){
-				$('#bk-code').val(full_multiyear + itemized_code);
-				break checked_options;
-			} else {
-				$('#bk-code').val(full_multiyear);
-			}
+
+		// Assemble selected code fragments to be included in bookmarklet
+		var code_to_minify = [];
+		code_to_minify.push(full_multiyear)
+		if (check_all_option == true){
+			code_to_minify.push(check_all_sites)
 		}
+		if (valid_thru_option == true){
+			code_to_minify.push(myvalidthru)
+		}
+		if (itemized_column == true){
+			code_to_minify.push(itemized_code)
+		}
+		if (discount_total_option == true){
+			code_to_minify.push(total_discount_amount_code)
+		}
+		code_to_minify = code_to_minify.join("");
+		$('#bk-code').val(code_to_minify);
+
 
 		if (!$.trim(code)) {
 			alert('Please enter some code first, so I can create a glorious bookmarklet for you!  *If you see this message repeatedly, you may need to reload the page.*');
